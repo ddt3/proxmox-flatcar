@@ -1,0 +1,31 @@
+variant: flatcar
+version: 1.0.0
+storage:
+  files:
+  - path: /home/core/docker-compose.yml
+    contents:
+      inline: |
+        services:
+          lms:
+            container_name: lms
+            image: lmscommunity/lyrionmusicserver
+            volumes:
+              - /home/core/lms/config:/config:rw
+              - /home/core/lms/Music:/music:ro
+              - /home/core/lms/playlist:/playlist:rw
+            ports:
+              - 9000:9000/tcp
+              - 9090:9090/tcp
+              - 3483:3483/tcp
+              - 3483:3483/udp
+            environment:
+              - HTTP_PORT=9000
+              - PUID=2000
+              - PGID=63000
+              - TZ=Europe/Amsterdam
+            restart: always
+    mode: 0644
+    user:
+      name: core
+    group:
+      name: core

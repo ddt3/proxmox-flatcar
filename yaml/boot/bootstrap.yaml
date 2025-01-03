@@ -1,0 +1,12 @@
+
+variant: flatcar
+version: 1.0.0
+ignition:
+  config:
+    merge:
+    - source: http://www-fc.familie-dokter.lan/ign/REPLACE.ign
+storage:
+  files:
+  - path: /etc/hostname
+    contents:
+      inline: "REPLACE"

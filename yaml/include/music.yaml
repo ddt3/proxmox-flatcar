@@ -1,0 +1,16 @@
+variant: flatcar
+version: 1.0.0
+systemd:
+  units:
+    - name: home-core-lms-Music.mount
+      enabled: true
+      contents: |
+        [Unit]
+        Before=remote-fs.target application.service
+        [Mount]
+        What=truenasscale.familie-dokter.lan:/mnt/Safe/Music
+        Where=/home/core/lms/Music
+        Type=nfs
+        [Install]
+        WantedBy=remote-fs.target 
+        RequiredBy=application.service                

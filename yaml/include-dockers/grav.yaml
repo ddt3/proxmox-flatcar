@@ -1,0 +1,26 @@
+variant: flatcar
+version: 1.0.0
+storage:
+  files:
+  - path: /home/core/docker-compose.yml
+    contents:
+      inline: |
+        services:
+          grav:
+            image: lscr.io/linuxserver/grav:latest
+            container_name: grav
+            environment:
+              - PUID=500
+              - PGID=500
+              - TZ=Europe/Amsterdam
+            volumes:
+              - /home/core/grav/config:/config
+            ports:
+              - 80:80
+            restart: unless-stopped
+
+    mode: 0644
+    user:
+      name: core
+    group:
+      name: core

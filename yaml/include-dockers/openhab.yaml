@@ -1,0 +1,26 @@
+variant: flatcar
+version: 1.0.0
+storage:
+  files:
+  - path: /home/core/docker-compose.yml
+    contents:
+      inline: |
+        services:
+          openhab:
+            image: "openhab/openhab:4.3.0"
+            restart: always
+            network_mode: host
+            volumes:
+              - "/etc/localtime:/etc/localtime:ro"
+              - "/etc/timezone:/etc/timezone:ro"
+              - "/home/core/openhab_addons:/openhab/addons"
+              - "/home/core/openhab_conf:/openhab/conf"
+              - "/home/core/openhab_userdata:/openhab/userdata"
+            environment:
+              CRYPTO_POLICY: "unlimited"
+              EXTRA_JAVA_OPTS: "-Duser.timezone=Europe/Amsterdam"
+              USER_ID: 500
+              GROUP_ID: 500
+              OPENHAB_HTTP_PORT: "8080"
+              OPENHAB_HTTPS_PORT: "8443"
+              TZ: "Europe/Amsterdam"

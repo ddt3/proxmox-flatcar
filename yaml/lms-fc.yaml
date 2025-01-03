@@ -1,0 +1,11 @@
+
+variant: flatcar
+version: 1.0.0
+ignition:
+  config:
+    merge:
+    - source: http://www-fc.familie-dokter.lan/ign/include/ssh.ign
+    - source: http://www-fc.familie-dokter.lan/ign/include/add-compose.ign
+    - source: http://www-fc.familie-dokter.lan/ign/include/music.ign
+    - source: http://www-fc.familie-dokter.lan/ign/include-dockers/lms.ign
+    - source: http://www-fc.familie-dokter.lan/ign/include/start-docker.ign

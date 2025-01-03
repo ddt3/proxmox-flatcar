@@ -1,0 +1,14 @@
+variant: flatcar
+version: 1.0.0
+systemd:
+  units:
+    - name: application.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Minimalist docker-compose example
+        #RequiresMountsFor=/srv/file/named
+        [Service]
+        ExecStart=/opt/bin/docker-compose -f /home/core/docker-compose.yml up
+        [Install]
+        WantedBy=multi-user.target

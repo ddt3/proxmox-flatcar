@@ -1,0 +1,8 @@
+
+variant: flatcar
+version: 1.0.0
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCb4j3+cYlVtimtdeXPH2wdf9viOYKAYPKqSvmuLSTqJcUY6ABmQ9GrDQewhxtcs8GmZbhmEhHBGeVsMR0TEm0htgV6KoeizIWxem4hdwF1UePfwwxZNMPhQxw0ItRl2wqp99EgeLAoua9bEyHDh4Tfng4nU2GzUJwmLD7t4vTpHNpv5xIrQDouYlF/N/fi7ZHWc3DWUPDCGn2gwrmHm+Ed++DqabhnyYC9iAz/Np9InVcwXvBjHdLSDc28n1ReBDLlEUfW0NJdWr/Dg+mP5QIU2oBxUbtm0Yuh8pqtOB4LQ6LIQh0NP6r1lRaS0WTKrO/CInmfA8W1XlF7CoQIQmoABz0o10izmNcinUhJ3ZiOtIF9PB7LIrGVSoG5cztgblmwUSoyHVUzh5WHo6l2bzWnvPmld1iI+wasuXj4CLHQgWCAYRrz41QgUT2YT8H5wtf/+ar0NVfPsoF/UveqA9asNBL8v4WRaoGMM4x+K3V1oxYNx8Ek/Vg4yeGx+Yj5V1E= dries@beast"

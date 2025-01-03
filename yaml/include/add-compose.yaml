@@ -1,0 +1,11 @@
+
+variant: flatcar
+version: 1.0.0
+storage:
+  files:
+  - path: /opt/bin/docker-compose
+    contents:
+      source: https://github.com/docker/compose/releases/download/v2.32.0/docker-compose-linux-x86_64
+      verification:
+        hash: sha256-c204bc7058fb881b2a39175df5c3596f6b08ef9e358d7236df7cc781f74695bd
+    mode: 0755

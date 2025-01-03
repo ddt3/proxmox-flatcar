@@ -1,0 +1,20 @@
+variant: flatcar
+version: 1.0.0
+storage:
+  files:
+  - path: /home/core/docker-compose.yml
+    contents:
+      inline: |
+        version: "3"
+        services:
+          portainer:
+            image: portainer/portainer-ce:latest
+            container_name: portainer
+            ports:
+              - 9000:9000
+            volumes:
+              - portainer_data:/data
+              - /var/run/docker.sock:/var/run/docker.sock
+            restart: unless-stopped
+        volumes:
+          portainer_data:
