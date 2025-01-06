@@ -1,6 +1,7 @@
 # Create Flatcar VMs in ProxMox
 This repository contains some scripts that I created for personal use. 
 With these scripts I can create a flatcar VM on my proxmox cluster, using ignition files for set-up.
+I assume it might have value for others too, so feel free to use this.
 
 #### Prequisites
 * For these scripts to work a webserver is needed that serves the ignition files. 
