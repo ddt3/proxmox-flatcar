@@ -10,10 +10,10 @@ NAME=$1
 ########
 # Config 
 ########
-TMPDIR="/tmp"
+IGNDIR="/mnt/pve/NFS-USB/snippets"
 IGNFileURL="http://www-fc.familie-dokter.lan/ign/boot/bootstrap.ign"
-IMAGE="${TMPDIR}/flatcar_production_qemu_image.img"
-IGNBOOT="${TMPDIR}/bootstrap.ign"
+IMAGE="${IGNDIR}/flatcar_production_qemu_image.img"
+IGNBOOT="${IGNDIR}/bootstrap.ign"
 
 ########
 # Retrieve an available vm id
@@ -37,7 +37,7 @@ wget ${IGNFileURL} --output-document=${IGNBOOT}
 # Use the actual name of the vm in "bootstrap ignition file", which will allow flatcar to retrieve the proper ignition file during startup
 ########
 
-IGNITION="${TMPDIR}/${NAME}.ign"
+IGNITION="${IGNDIR}/${NAME}.ign"
 cat ${IGNBOOT} | sed --expression=s/REPLACE/$1/g > ${IGNITION}
 
 ########
