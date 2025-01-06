@@ -10,5 +10,8 @@ ignition:
     - source: http://www-fc.familie-dokter.lan/ign/include/start-docker.ign
     - source: http://www-fc.familie-dokter.lan/ign/include-dockers/DOCKERFILE.ign
     - source: http://www-fc.familie-dokter.lan/ign/include/DOCKERFILE.ign
-
-
+storage:
+  files:
+  - path: /etc/hostname
+    contents:
+      inline: "REPLACE"

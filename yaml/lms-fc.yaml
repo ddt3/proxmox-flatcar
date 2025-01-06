@@ -9,3 +9,8 @@ ignition:
     - source: http://www-fc.familie-dokter.lan/ign/include/music.ign
     - source: http://www-fc.familie-dokter.lan/ign/include-dockers/lms.ign
     - source: http://www-fc.familie-dokter.lan/ign/include/start-docker.ign
+storage:
+  files:
+  - path: /etc/hostname
+    contents:
+      inline: "REPLACE"

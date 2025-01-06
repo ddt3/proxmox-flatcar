@@ -6,19 +6,25 @@ if [[ $# -ne 1 ]] ; then
     exit 0
 fi
 
-NAME=$1
 ########
-# Config 
+# Config, change to your own needs
 ########
 IGNDIR="/mnt/pve/NFS-USB/snippets"
-IGNFileURL="http://www-fc.familie-dokter.lan/ign/boot/bootstrap.ign"
+BaseIGNFileURL="http://www-fc.familie-dokter.lan/ign/"
 IMAGE="${IGNDIR}/flatcar_production_qemu_image.img"
-IGNBOOT="${IGNDIR}/bootstrap.ign"
+
+########
+# Variables 
+########
+NAME=$1
+IGNFileURL=${BaseIGNFileURL}"/${NAME}.ign"
+IGNITION="${IGNDIR}/${NAME}.ign"
+
 
 ########
 # Retrieve an available vm id
 ########
-ID=$(pvesh get /cluster/nextid)
+NewVMID=$(pvesh get /cluster/nextid)
 
 ########
 # Download  Flatcar image if it does not yet exist
@@ -31,23 +37,21 @@ fi
 # Download "bootstrap ignation file":
 # This ign file is used to set the host name and to retrieve the actual ignition file that contains the configuration for the new flatcar vm
 ########
-wget ${IGNFileURL} --output-document=${IGNBOOT}
+
+wget ${IGNFileURL} --output-document=${IGNITION}.tmp
+
+# Make sure the correct hostname is used for the VMN
+cat ${IGNITION}.tmp | sed --expression=s/REPLACE/${NAME}/g > ${IGNITION}
+rm ${IGNITION}.tmp
 
 ########
-# Use the actual name of the vm in "bootstrap ignition file", which will allow flatcar to retrieve the proper ignition file during startup
+# Now create the Vm with the proper name using the available id
 ########
 
-IGNITION="${IGNDIR}/${NAME}.ign"
-cat ${IGNBOOT} | sed --expression=s/REPLACE/$1/g > ${IGNITION}
-
-########
-# Now create the Vm with the proper name using the available ID
-########
-
-qm create ${ID} --name ${NAME} --cores 2 --memory 2048 --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-pci
-qm set ${ID} --scsi0 OneTB:0,import-from=${IMAGE}
-qm set ${ID} --boot order=scsi0
-qm set ${ID} --serial0 socket --vga qxl
-qm set ${ID} --agent enabled=1
-qm set ${ID} --args '-fw_cfg name=opt/com.coreos/config,file='${IGNITION} # make sure the " bootstrap ignition file" is used
-qm start ${ID}                                                                             
+qm create ${NewVMID} --name ${NAME} --cores 2 --memory 2048 --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-pci
+qm set ${NewVMID} --scsi0 OneTB:0,import-from=${IMAGE}
+qm set ${NewVMID} --boot order=scsi0
+qm set ${NewVMID} --serial0 socket --vga qxl
+qm set ${NewVMID} --agent enabled=1
+qm set ${NewVMID} --args '-fw_cfg name=opt/com.coreos/config,file='${IGNITION} # make sure the " bootstrap ignition file" is used
+qm start ${NewVMID}                                                                             

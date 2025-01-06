@@ -8,5 +8,8 @@ ignition:
     - source: http://www-fc.familie-dokter.lan/ign/include/add-compose.ign
     - source: http://www-fc.familie-dokter.lan/ign/include/start-docker.ign
     - source: http://www-fc.familie-dokter.lan/ign/include-dockers/grav.ign
-
-
+storage:
+  files:
+  - path: /etc/hostname
+    contents:
+      inline: "REPLACE"
