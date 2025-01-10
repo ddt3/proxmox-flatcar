@@ -53,5 +53,5 @@ qm set ${NewVMID} --scsi0 OneTB:0,import-from=${IMAGE}
 qm set ${NewVMID} --boot order=scsi0
 qm set ${NewVMID} --serial0 socket --vga qxl
 qm set ${NewVMID} --agent enabled=1
-qm set ${NewVMID} --args '-fw_cfg name=opt/com.coreos/config,file='${IGNITION} # make sure the " bootstrap ignition file" is used
+qm set ${NewVMID} --args '-fw_cfg name=opt/org.flatcar-linux/config,file,file='${IGNITION} # make sure the " bootstrap ignition file" is used
 qm start ${NewVMID}                                                                             

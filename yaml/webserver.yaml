@@ -1,0 +1,15 @@
+
+variant: fcos
+version: 1.0.0
+ignition:
+  config:
+    merge:
+    - local: /include/ssh.ign
+    - local: /include/add-compose.ign
+    - local: /include/music.ign
+    - local: /include/start-docker.ign
+storage:
+  files:
+  - path: /etc/hostname
+    contents:
+      inline: "REPLACE"
