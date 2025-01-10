@@ -2,7 +2,14 @@
 # This scrtipt creates ignition files from all YAML files in a specific folder.
 # The itnitation files are create in a seperate folder (ign) mirroring the folder scructure of the YAML files.
 ########
-YAML_FOLDER=/home/core/local/yaml
+if [ -z "$1" ]; then
+    echo "Usage: $0 YAML_FOLDER"
+    exit 1
+else
+    YAML_FOLDER=$(realpath $1)
+fi
+
+
 # Not that in this case IGN folder automatocally becomes: /home/core/local/ign
 
 for yamlfile in $(find $YAML_FOLDER -type f -name "*.yaml" -exec realpath {} \;); 

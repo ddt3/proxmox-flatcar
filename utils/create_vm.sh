@@ -24,22 +24,20 @@ IGNITION_UPLOAD=
 PROXMOX_SCRIPT=${SCRIPT_DIR}/proxmox_create_vm.sh
 IGN_SCRIPT=${SCRIPT_DIR}/yaml2ign.sh
 YAML_DIR=/home/core/local/yaml
-YAML_DIR=$(echo $SCRIPT_DIR | sed -e "s/\/utils/yaml/")
-IGN_DIR=$(echo $SCRIPT_DIR | sed -e "s/\/utils/ign/")
+YAML_DIR=$(echo $SCRIPT_DIR | sed -e "s/\/utils/\/yaml/")
+IGN_DIR=$(echo $SCRIPT_DIR | sed -e "s/\/utils/\/ign/")
 
+YAML_FILE="${YAML_DIR}/${VM_NAME}.yaml"
+
+# First check if yaml configuration with VMNAME does exist
+if [ ! -f ${YAML_FILE} ]; then
+    echo "ERROR: YAML configuration for VM ${VM_NAME} not found."
+    exit 1
+fi
 ########
 # The actual script
 ########
 # Build ignition files
-${IGN_SCRIPT} 
-
-
-YAML_FILE=echo ${YAML_DIR}'/'${VM_NAME}.yaml 
-echo $YAML_FILE
-# First check if yaml configuration with VMNAME does exist
-if [ ! -f ${YAML_FILE} ]; then
-    echo "ERROR: YAML configuration for VM '$VMNAME' not found."
-    exit 1
-fi
+${IGN_SCRIPT} ${YAML_DIR}
 
 cat ${PROXMOX_SCRIPT} | ssh ${PROXMOX_USER}@${PROXMOX_HOST} bash -s $VM_NAME #
