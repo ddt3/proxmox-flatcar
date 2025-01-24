@@ -54,4 +54,7 @@ qm set ${NewVMID} --boot order=scsi0
 qm set ${NewVMID} --serial0 socket --vga qxl
 qm set ${NewVMID} --agent enabled=1
 qm set ${NewVMID} --args '-fw_cfg name=opt/org.flatcar-linux/config,file='${IGNITION} # make sure the " bootstrap ignition file" is used
-qm start ${NewVMID}                                                                             
+echo "---------------------------------------"
+echo VM: ${NAME} id:${NewVMID} has been created
+echo "---------------------------------------"
+# qm start ${NewVMID}                                                                             

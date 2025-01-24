@@ -1,0 +1,13 @@
+variant: flatcar
+version: 1.0.0
+storage:
+  files:
+    - path: /etc/timezone
+      contents:
+        inline: |
+          Europe/Amsterdam
+  links:
+    - path: /etc/localtime
+      target: ../usr/share/zoneinfo/Europe/Amsterdam
+
+    

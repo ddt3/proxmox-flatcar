@@ -1,0 +1,15 @@
+
+variant: flatcar
+version: 1.0.0
+storage:
+  files:
+    - path: /etc/userdb/core:dialout.membership
+      contents:
+        inline: " "
+    - path: /etc/userdb/core:tty.membership
+      contents:
+        inline: " "
+    - path: /etc/userdb/core:docker.membership
+      contents:
+        inline: " "
+

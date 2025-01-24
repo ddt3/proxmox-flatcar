@@ -9,6 +9,8 @@ systemd:
         Description=Minimalist docker-compose example
         #RequiresMountsFor=/srv/file/named
         [Service]
+        User=core
         ExecStart=/opt/bin/docker-compose -f /home/core/docker-compose.yml up
+        ExecStop=/opt/bin/docker-compose -f /home/core/docker-compose.yml stop
         [Install]
         WantedBy=multi-user.target
